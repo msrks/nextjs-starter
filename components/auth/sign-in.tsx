@@ -29,9 +29,9 @@ export function SignIn() {
       
       router.push("/");
       router.refresh();
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Sign in error:", err);
-      setError(err.message || "Failed to sign in");
+      setError(err instanceof Error ? err.message : "Failed to sign in");
     } finally {
       setIsLoading(false);
     }

@@ -44,9 +44,9 @@ export function SignUp() {
       
       router.push("/");
       router.refresh();
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Sign up error:", err);
-      setError(err.message || "Failed to sign up");
+      setError(err instanceof Error ? err.message : "Failed to sign up");
     } finally {
       setIsLoading(false);
     }
