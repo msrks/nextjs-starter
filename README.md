@@ -2,7 +2,7 @@
 
 A production-ready Next.js 15 starter template with authentication, database, and modern tooling. Perfect for building full-stack web applications quickly and securely.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmsrks%2Fnextjs-starter&env=DATABASE_URL,BETTER_AUTH_SECRET,BETTER_AUTH_URL&envDescription=Environment%20variables%20needed%20for%20the%20application&envLink=https%3A%2F%2Fgithub.com%2Fmsrks%2Fnextjs-starter%23environment-variables)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmsrks%2Fnextjs-starter&env=DATABASE_URL,BETTER_AUTH_SECRET,BETTER_AUTH_URL,NEXT_PUBLIC_APP_URL&envDescription=Environment%20variables%20needed%20for%20the%20application&envLink=https%3A%2F%2Fgithub.com%2Fmsrks%2Fnextjs-starter%23environment-variables)
 
 ## ✨ Features
 
@@ -29,7 +29,7 @@ A production-ready Next.js 15 starter template with authentication, database, an
 
 Deploy this template to Vercel with one click:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmsrks%2Fnextjs-starter&env=DATABASE_URL,BETTER_AUTH_SECRET,BETTER_AUTH_URL&envDescription=Environment%20variables%20needed%20for%20the%20application&envLink=https%3A%2F%2Fgithub.com%2Fmsrks%2Fnextjs-starter%23environment-variables)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmsrks%2Fnextjs-starter&env=DATABASE_URL,BETTER_AUTH_SECRET,BETTER_AUTH_URL,NEXT_PUBLIC_APP_URL&envDescription=Environment%20variables%20needed%20for%20the%20application&envLink=https%3A%2F%2Fgithub.com%2Fmsrks%2Fnextjs-starter%23environment-variables)
 
 After deployment, you'll need to:
 1. **Set up Neon Database** - Create a [Neon](https://neon.tech) account and get your `DATABASE_URL`
@@ -64,6 +64,9 @@ DATABASE_URL="postgresql://username:password@host.neon.tech/database_name?sslmod
 # Authentication - Generate secure secret
 BETTER_AUTH_SECRET="your-very-secure-secret-key"
 BETTER_AUTH_URL="http://localhost:3000"
+
+# App URL (Client-side) - Important for production deployment
+NEXT_PUBLIC_APP_URL="http://localhost:3000"
 ```
 
 ### 3. Database Setup
@@ -90,7 +93,8 @@ This template requires the following environment variables:
 |----------|-------------|---------|
 | `DATABASE_URL` | PostgreSQL connection string from Neon | `postgresql://user:pass@host.neon.tech/db?sslmode=require` |
 | `BETTER_AUTH_SECRET` | Secret key for session encryption | `your-very-secure-secret-key` |
-| `BETTER_AUTH_URL` | Base URL for your application | `http://localhost:3000` (dev) or `https://yourdomain.com` (prod) |
+| `BETTER_AUTH_URL` | Base URL for your application (server-side) | `http://localhost:3000` (dev) or `https://yourdomain.com` (prod) |
+| `NEXT_PUBLIC_APP_URL` | Base URL for client-side API calls | `http://localhost:3000` (dev) or `https://yourdomain.com` (prod) |
 
 ### Getting Your Environment Variables
 
@@ -106,6 +110,11 @@ This template requires the following environment variables:
 3. **BETTER_AUTH_URL**: 
    - Use `http://localhost:3000` for development
    - Use your actual domain for production
+
+4. **NEXT_PUBLIC_APP_URL**: 
+   - Use `http://localhost:3000` for development
+   - Use your actual domain for production (e.g., `https://yourdomain.com`)
+   - **Important**: This must be set correctly in production to avoid authentication issues
 
 ## 📁 Project Structure
 
@@ -184,6 +193,7 @@ Use the "Deploy with Vercel" button at the top of this README for instant deploy
    - `DATABASE_URL` - Your Neon database connection string
    - `BETTER_AUTH_SECRET` - A secure random string
    - `BETTER_AUTH_URL` - Your production domain (e.g., `https://yourdomain.com`)
+   - `NEXT_PUBLIC_APP_URL` - Your production domain (e.g., `https://yourdomain.com`)
 4. Deploy!
 
 ### Post-Deployment Steps
