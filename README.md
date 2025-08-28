@@ -2,6 +2,8 @@
 
 A production-ready Next.js 15 starter template with authentication, database, and modern tooling. Perfect for building full-stack web applications quickly and securely.
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmsrks%2Fnextjs-starter&env=DATABASE_URL,BETTER_AUTH_SECRET,BETTER_AUTH_URL&envDescription=Environment%20variables%20needed%20for%20the%20application&envLink=https%3A%2F%2Fgithub.com%2Fmsrks%2Fnextjs-starter%23environment-variables)
+
 ## ✨ Features
 
 - **🚀 Next.js 15** - Latest App Router with Turbopack for fast development
@@ -23,13 +25,25 @@ A production-ready Next.js 15 starter template with authentication, database, an
 - **Deployment:** Vercel-ready
 - **Package Manager:** pnpm
 
-## 🚀 Quick Start
+## 🚀 One-Click Deploy
+
+Deploy this template to Vercel with one click:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmsrks%2Fnextjs-starter&env=DATABASE_URL,BETTER_AUTH_SECRET,BETTER_AUTH_URL&envDescription=Environment%20variables%20needed%20for%20the%20application&envLink=https%3A%2F%2Fgithub.com%2Fmsrks%2Fnextjs-starter%23environment-variables)
+
+After deployment, you'll need to:
+1. **Set up Neon Database** - Create a [Neon](https://neon.tech) account and get your `DATABASE_URL`
+2. **Generate Auth Secret** - Create a secure secret for `BETTER_AUTH_SECRET`
+3. **Update Environment Variables** - Add the variables in your Vercel dashboard
+4. **Push Database Schema** - Run `pnpm drizzle-kit push` locally or in Vercel's terminal
+
+## 🛠️ Manual Setup
 
 ### 1. Clone and Install
 
 ```bash
-git clone <your-repo-url>
-cd your-project-name
+git clone https://github.com/msrks/nextjs-starter.git
+cd nextjs-starter
 pnpm install
 ```
 
@@ -67,6 +81,31 @@ pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) - you'll be redirected to sign up!
+
+## 🔧 Environment Variables
+
+This template requires the following environment variables:
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `DATABASE_URL` | PostgreSQL connection string from Neon | `postgresql://user:pass@host.neon.tech/db?sslmode=require` |
+| `BETTER_AUTH_SECRET` | Secret key for session encryption | `your-very-secure-secret-key` |
+| `BETTER_AUTH_URL` | Base URL for your application | `http://localhost:3000` (dev) or `https://yourdomain.com` (prod) |
+
+### Getting Your Environment Variables
+
+1. **DATABASE_URL**: 
+   - Create a [Neon](https://neon.tech) account
+   - Create a new project
+   - Copy the connection string from your dashboard
+
+2. **BETTER_AUTH_SECRET**: 
+   - Generate a secure random string (32+ characters)
+   - You can use: `openssl rand -base64 32`
+
+3. **BETTER_AUTH_URL**: 
+   - Use `http://localhost:3000` for development
+   - Use your actual domain for production
 
 ## 📁 Project Structure
 
@@ -133,20 +172,27 @@ pnpm drizzle-kit studio     # Open Drizzle Studio
 
 ## 📦 Deployment
 
-### Vercel (Recommended)
+### Option 1: One-Click Deploy (Recommended)
+
+Use the "Deploy with Vercel" button at the top of this README for instant deployment.
+
+### Option 2: Manual Deploy
 
 1. Push your code to GitHub
 2. Import your repository in [Vercel](https://vercel.com)
-3. Add your environment variables in Vercel dashboard
+3. Add your environment variables in Vercel dashboard:
+   - `DATABASE_URL` - Your Neon database connection string
+   - `BETTER_AUTH_SECRET` - A secure random string
+   - `BETTER_AUTH_URL` - Your production domain (e.g., `https://yourdomain.com`)
 4. Deploy!
 
-### Environment Variables for Production
+### Post-Deployment Steps
 
-```env
-DATABASE_URL="your-production-database-url"
-BETTER_AUTH_SECRET="your-production-secret"
-BETTER_AUTH_URL="https://yourdomain.com"
-```
+After deployment, make sure to:
+
+1. **Push your database schema**: Run `pnpm drizzle-kit push`
+2. **Test authentication**: Try signing up/in on your live site
+3. **Verify database connection**: Check that data persists correctly
 
 ## 🤝 Contributing
 
