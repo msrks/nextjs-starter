@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
 
 export function SignIn() {
   const [email, setEmail] = useState("");
@@ -76,13 +77,13 @@ export function SignIn() {
           />
         </div>
         
-        <button
+        <Button
           type="submit"
           disabled={isLoading}
-          className="w-full px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
+          className="w-full"
         >
           {isLoading ? "Signing In..." : "Sign In"}
-        </button>
+        </Button>
       </form>
     </div>
   );

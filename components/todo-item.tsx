@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { updateTodo, deleteTodo } from "@/lib/actions/todos";
+import { Button } from "@/components/ui/button";
 
 interface Todo {
   id: number;
@@ -58,18 +59,21 @@ export function TodoItem({ todo }: { todo: Todo }) {
                   rows={2}
                 />
                 <div className="flex space-x-2">
-                  <button
+                  <Button
                     onClick={handleSave}
-                    className="px-3 py-1 bg-green-500 text-white rounded text-sm hover:bg-green-600"
+                    variant="default"
+                    size="sm"
+                    className="bg-green-500 hover:bg-green-600"
                   >
                     Save
-                  </button>
-                  <button
+                  </Button>
+                  <Button
                     onClick={() => setIsEditing(false)}
-                    className="px-3 py-1 bg-gray-500 text-white rounded text-sm hover:bg-gray-600"
+                    variant="secondary"
+                    size="sm"
                   >
                     Cancel
-                  </button>
+                  </Button>
                 </div>
               </div>
             ) : (
@@ -91,18 +95,20 @@ export function TodoItem({ todo }: { todo: Todo }) {
         </div>
         {!isEditing && (
           <div className="flex space-x-2 ml-4">
-            <button
+            <Button
               onClick={() => setIsEditing(true)}
-              className="px-2 py-1 bg-blue-500 text-white rounded text-sm hover:bg-blue-600"
+              variant="default"
+              size="sm"
             >
               Edit
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={handleDelete}
-              className="px-2 py-1 bg-red-500 text-white rounded text-sm hover:bg-red-600"
+              variant="destructive"
+              size="sm"
             >
               Delete
-            </button>
+            </Button>
           </div>
         )}
       </div>

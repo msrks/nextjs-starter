@@ -3,11 +3,15 @@
 import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 
 interface User {
   id: string;
   name: string;
   email: string;
+  image?: string | null;
 }
 
 interface UserButtonProps {
@@ -31,18 +35,41 @@ export function UserButton({ user }: UserButtonProps) {
     }
   };
 
+  const getInitials = (name: string) => {
+    return name
+      .split(' ')
+      .map(word => word[0])
+      .join('')
+      .toUpperCase()
+      .slice(0, 2);
+  };
+
   return (
     <div className="flex items-center space-x-4">
-      <span className="text-sm text-gray-600">
-        Welcome, {user.name}
-      </span>
-      <button
+      <div className="flex items-center space-x-3">
+        <Avatar className="w-8 h-8">
+          <AvatarImage src={user.image || undefined} alt={user.name} />
+          <AvatarFallback className="text-xs">
+            {getInitials(user.name)}
+          </AvatarFallback>
+        </Avatar>
+        <span className="text-sm text-gray-600">
+          Welcome, {user.name}
+        </span>
+      </div>
+      <Button asChild size="sm">
+        <Link href="/profile">
+          Profile
+        </Link>
+      </Button>
+      <Button
         onClick={handleSignOut}
         disabled={isLoading}
-        className="px-3 py-1 bg-red-500 text-white rounded text-sm hover:bg-red-600 disabled:opacity-50"
+        variant="destructive"
+        size="sm"
       >
         {isLoading ? "Signing out..." : "Sign Out"}
-      </button>
+      </Button>
     </div>
   );
 }

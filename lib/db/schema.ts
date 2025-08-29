@@ -58,6 +58,7 @@ export const todos = pgTable("todos", {
   title: varchar({ length: 255 }).notNull(),
   description: text().notNull(),
   completed: boolean().notNull().default(false),
+  imageUrl: text("imageUrl"),
   userId: text("userId").notNull().references(() => user.id, { onDelete: "cascade" }),
   createdAt: timestamp().notNull().defaultNow(),
   updatedAt: timestamp().notNull().defaultNow(),
