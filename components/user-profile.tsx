@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -22,6 +22,7 @@ export function UserProfile({ user }: UserProfileProps) {
   const [uploading, setUploading] = useState(false);
   const [removing, setRemoving] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState<string | null>(user.image || null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -87,6 +88,10 @@ export function UserProfile({ user }: UserProfileProps) {
     }
   };
 
+  const handleUploadClick = () => {
+    fileInputRef.current?.click();
+  };
+
   const getInitials = (name: string) => {
     return name
       .split(" ")
@@ -108,15 +113,14 @@ export function UserProfile({ user }: UserProfileProps) {
 
         <div className="space-y-2">
           <div className="flex items-center justify-center space-x-2">
-            <Label htmlFor="avatar-upload" className="cursor-pointer">
-              <Button
-                className="inline-flex items-center space-x-2"
-                disabled={uploading || removing}
-              >
-                <Upload size={16} />
-                <span>{uploading ? "Uploading..." : "Upload Avatar"}</span>
-              </Button>
-            </Label>
+            <Button
+              onClick={handleUploadClick}
+              className="inline-flex items-center space-x-2"
+              disabled={uploading || removing}
+            >
+              <Upload size={16} />
+              <span>{uploading ? "Uploading..." : "Upload Avatar"}</span>
+            </Button>
             {avatarUrl && (
               <Button
                 onClick={handleRemoveAvatar}
@@ -130,7 +134,7 @@ export function UserProfile({ user }: UserProfileProps) {
             )}
           </div>
           <Input
-            id="avatar-upload"
+            ref={fileInputRef}
             type="file"
             className="hidden"
             accept="image/*"
